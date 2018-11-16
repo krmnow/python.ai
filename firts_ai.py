@@ -14,3 +14,7 @@ class Neural_Network(object):
     self.inputSize = 2
     self.outputSize = 1
     self.hiddenSize = 3
+
+    (2 * .2) + (9 * .8) = 7.6
+(2 * .6) + (9 * .3) = 3.9
+(2 * .1) + (9 * .7) = 6.5
