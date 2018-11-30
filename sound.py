@@ -16,3 +16,5 @@ plt.rcParams['axes.labelweight'] = 'bold'
 plt.rcParams['axes.titlesize'] = 12
 plt.rcParams['xtick.labelsize'] = 9
 plt.rcParams['ytick.labelsize'] = 9
+plt.rcParams['legend.fontsize'] = 11
+plt.rcParams['figure.titlesize'] = 13
