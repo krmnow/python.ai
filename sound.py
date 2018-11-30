@@ -13,3 +13,6 @@ plt.rcParams['font.monospace'] = 'Ubuntu Mono'
 plt.rcParams['font.size'] = 12
 plt.rcParams['axes.labelsize'] = 11
 plt.rcParams['axes.labelweight'] = 'bold'
+plt.rcParams['axes.titlesize'] = 12
+plt.rcParams['xtick.labelsize'] = 9
+plt.rcParams['ytick.labelsize'] = 9
