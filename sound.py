@@ -6,3 +6,10 @@ import tensorflow as tf
 import numpy as np
 %matplotlib inline
 plt.style.use('ggplot')
+
+plt.rcParams['font.family'] = 'serif'
+plt.rcParams['font.serif'] = 'Ubuntu'
+plt.rcParams['font.monospace'] = 'Ubuntu Mono'
+plt.rcParams['font.size'] = 12
+plt.rcParams['axes.labelsize'] = 11
+plt.rcParams['axes.labelweight'] = 'bold'
