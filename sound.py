@@ -18,3 +18,9 @@ plt.rcParams['xtick.labelsize'] = 9
 plt.rcParams['ytick.labelsize'] = 9
 plt.rcParams['legend.fontsize'] = 11
 plt.rcParams['figure.titlesize'] = 13
+
+def windows(data, window_size):
+    start = 0
+    while start < len(data):
+        yield int(start), int(start + window_size)
+        start += (window_size / 2)
