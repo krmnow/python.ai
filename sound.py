@@ -55,3 +55,8 @@ def one_hot_encode(labels):
     one_hot_encode = np.zeros((n_labels,n_unique_labels))
     one_hot_encode[np.arange(n_labels), labels] = 1
     return one_hot_encode
+
+parent_dir = 'Sound-Data'
+sub_dirs= ['fold1','fold2']
+features,labels = extract_features(parent_dir,sub_dirs)
+labels = one_hot_encode(labels)
