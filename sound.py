@@ -48,3 +48,10 @@ def extract_features(parent_dir,sub_dirs,file_ext="*.wav",bands = 60, frames = 4
         features[i, :, :, 1] = librosa.feature.delta(features[i, :, :, 0])
     
     return np.array(features), np.array(labels,dtype = np.int)
+
+def one_hot_encode(labels):
+    n_labels = len(labels)
+    n_unique_labels = len(np.unique(labels))
+    one_hot_encode = np.zeros((n_labels,n_unique_labels))
+    one_hot_encode[np.arange(n_labels), labels] = 1
+    return one_hot_encode
