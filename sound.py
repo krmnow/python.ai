@@ -24,3 +24,9 @@ def windows(data, window_size):
     while start < len(data):
         yield int(start), int(start + window_size)
         start += (window_size / 2)
+
+def extract_features(parent_dir,sub_dirs,file_ext="*.wav",bands = 60, frames = 41):
+    window_size = 512 * (frames - 1)
+    log_specgrams = []
+    labels = []
+    
