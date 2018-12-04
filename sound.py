@@ -68,3 +68,6 @@ def weight_variable(shape):
 def bias_variable(shape):
     initial = tf.constant(1.0, shape = shape)
     return tf.Variable(initial)
+
+def conv2d(x, W):
+    return tf.nn.conv2d(x,W,strides=[1,2,2,1], padding='SAME')
