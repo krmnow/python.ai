@@ -71,3 +71,8 @@ def bias_variable(shape):
 
 def conv2d(x, W):
     return tf.nn.conv2d(x,W,strides=[1,2,2,1], padding='SAME')
+
+def apply_convolution(x,kernel_size,num_channels,depth):
+    weights = weight_variable([kernel_size, kernel_size, num_channels, depth])
+    biases = bias_variable([depth])
+    return tf.nn.relu(tf.add(conv2d(x, weights),biases))
