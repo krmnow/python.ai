@@ -60,3 +60,7 @@ parent_dir = 'Sound-Data'
 sub_dirs= ['fold1','fold2']
 features,labels = extract_features(parent_dir,sub_dirs)
 labels = one_hot_encode(labels)
+
+def weight_variable(shape):
+    initial = tf.truncated_normal(shape, stddev = 0.1)
+    return tf.Variable(initial)
