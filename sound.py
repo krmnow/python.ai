@@ -85,4 +85,5 @@ rnd_indices = np.random.rand(len(labels)) < 0.70
 train_x = features[rnd_indices]
 train_y = labels[rnd_indices]
 test_x = features[~rnd_indices]
+test_y = labels[~rnd_indices]
 
