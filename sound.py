@@ -80,3 +80,6 @@ def apply_convolution(x,kernel_size,num_channels,depth):
 def apply_max_pool(x,kernel_size,stride_size):
     return tf.nn.max_pool(x, ksize=[1, kernel_size, kernel_size, 1], 
                           strides=[1, stride_size, stride_size, 1], padding='SAME')
+
+rnd_indices = np.random.rand(len(labels)) < 0.70
+
