@@ -98,3 +98,5 @@ batch_size = 50
 kernel_size = 30
 depth = 20
 num_hidden = 200
+
+learning_rate = 0.01
