@@ -87,3 +87,9 @@ train_y = labels[rnd_indices]
 test_x = features[~rnd_indices]
 test_y = labels[~rnd_indices]
 
+frames = 41
+bands = 60
+
+feature_size = 2460 #60x41
+num_labels = 10
+num_channels = 2
