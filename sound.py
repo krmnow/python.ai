@@ -100,3 +100,4 @@ depth = 20
 num_hidden = 200
 
 learning_rate = 0.01
+training_iterations = 2000
