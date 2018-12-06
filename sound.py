@@ -93,3 +93,8 @@ bands = 60
 feature_size = 2460 #60x41
 num_labels = 10
 num_channels = 2
+
+batch_size = 50
+kernel_size = 30
+depth = 20
+num_hidden = 200
