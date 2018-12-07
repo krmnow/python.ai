@@ -102,5 +102,7 @@ num_hidden = 200
 learning_rate = 0.01
 training_iterations = 2000
 
+cov = apply_convolution(X,kernel_size,num_channels,depth)
+
 X = tf.placeholder(tf.float32, shape=[None,bands,frames,num_channels])
 Y = tf.placeholder(tf.float32, shape=[None,num_labels])
