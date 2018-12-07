@@ -103,3 +103,4 @@ learning_rate = 0.01
 training_iterations = 2000
 
 X = tf.placeholder(tf.float32, shape=[None,bands,frames,num_channels])
+Y = tf.placeholder(tf.float32, shape=[None,num_labels])
