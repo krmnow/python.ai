@@ -106,3 +106,6 @@ cov = apply_convolution(X,kernel_size,num_channels,depth)
 
 X = tf.placeholder(tf.float32, shape=[None,bands,frames,num_channels])
 Y = tf.placeholder(tf.float32, shape=[None,num_labels])
+
+shape = cov.get_shape().as_list()
+cov_flat = tf.reshape(cov, [-1, shape[1] * shape[2] * shape[3]])
