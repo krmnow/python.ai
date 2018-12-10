@@ -114,3 +114,5 @@ f_weights = weight_variable([shape[1] * shape[2] * depth, num_hidden])
 f_biases = bias_variable([num_hidden])
 f = tf.nn.sigmoid(tf.add(tf.matmul(cov_flat, f_weights),f_biases))
 
+out_weights = weight_variable([num_hidden, num_labels])
+
