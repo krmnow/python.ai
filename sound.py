@@ -118,3 +118,5 @@ out_weights = weight_variable([num_hidden, num_labels])
 out_biases = bias_variable([num_labels])
 y_ = tf.nn.softmax(tf.matmul(f, out_weights) + out_biases)
 
+cross_entropy = -tf.reduce_sum(Y * tf.log(y_))
+optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cross_entropy)
