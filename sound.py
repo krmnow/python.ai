@@ -120,3 +120,5 @@ y_ = tf.nn.softmax(tf.matmul(f, out_weights) + out_biases)
 
 cross_entropy = -tf.reduce_sum(Y * tf.log(y_))
 optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cross_entropy)
+correct_prediction = tf.equal(tf.argmax(y_,1), tf.argmax(Y,1))
+
