@@ -123,3 +123,4 @@ optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cross_e
 correct_prediction = tf.equal(tf.argmax(y_,1), tf.argmax(Y,1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
+cost_history = np.empty(shape=[1],dtype=float)
