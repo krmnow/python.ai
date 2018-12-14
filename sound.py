@@ -126,3 +126,5 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 cost_history = np.empty(shape=[1],dtype=float)
 with tf.Session() as session:
     tf.global_variables_initializer().run()
+    for itr in range(training_iterations):    
+        offset = (itr * batch_size) % (train_y.shape[0] - batch_size)
