@@ -124,3 +124,5 @@ correct_prediction = tf.equal(tf.argmax(y_,1), tf.argmax(Y,1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 cost_history = np.empty(shape=[1],dtype=float)
+with tf.Session() as session:
+    tf.global_variables_initializer().run()
