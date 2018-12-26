@@ -46,3 +46,4 @@ def forward(self, X):
 def sigmoid(self, s):
   # activation function
   return 1/(1+np.exp(-s))
+print("Hello")
