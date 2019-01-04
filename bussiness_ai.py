@@ -30,3 +30,6 @@ R = np.array([[0,1,0,0,0,0,0,0,0,0,0,0],
               []])
 
 Q = np.array(np.zeros([12,12]))
+
+for i in range(1000):
+    current_state = np.random.randint(0,12)
