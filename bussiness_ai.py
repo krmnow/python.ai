@@ -33,3 +33,8 @@ Q = np.array(np.zeros([12,12]))
 
 for i in range(1000):
     current_state = np.random.randint(0,12)
+    playable_actions = []
+    for j in range(12):
+        if R[current_state, j] > 0:
+            playable_actions.append(j)
+    np.random.choice(playable_actions) 
