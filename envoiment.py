@@ -27,3 +27,12 @@ class Environment(object):
         self.reward = 0.0
         self.game_over = 0
         self.train = 1
+        
+    def update_env(self, direction, energy_ai, month):
+        energy_noai = 0
+            if self.temperature_noqai < self.optimal_temperature[0]:
+                energy_noai = self.optimal_temperature[0] - self.temperature_noqai
+                self.temperature_noai = self.optimal_temperature[0]
+            elif self.temperature_noqai > self.optimal_temperature[1]:
+                energy_noai = self.temperature_noqai - self.optimal_temperature[1]
+                
