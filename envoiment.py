@@ -36,3 +36,8 @@ class Environment(object):
             elif self.temperature_noqai > self.optimal_temperature[1]:
                 energy_noai = self.temperature_noqai - self.optimal_temperature[1]
                 
+            self.reward = energy_noai - ebergu_ai
+            
+            sefl.reward = le-3 * self.reward
+            
+                
