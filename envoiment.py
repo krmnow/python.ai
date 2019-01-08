@@ -97,9 +97,34 @@ class Environment(object):
             
             #SCALING THE NEXT STAGE
             
+            scaled_temperature_ai = (self.temperature_ai - self.min_temperature) / (self.max_temperature - self.min_temperature)
+            scaled_number_users = (self.current_number_users - self.min_number_users) / (self.max_number_users - self.min_number_users)
+            scaled_rate_data = (self.current_rate_data - self.min_rate_data) / (self.max_rate_data - self.min_rate_data)
+            next_state = np.matrix([scaled_temperature_ai, scaled_number_users, scaled_rate_data])
+            
             #RETURNING THE NEXT STATE, THE REWARD AND GAME OVER
-            
+            return next_state, self.reward, self.game_over
 #MAKING A METHOD THAT RESETS THE ENVOIRMENT
-            
-            
-            
+
+    def reset(self, new_month):
+        self.atmospheric_temperatures = self.monthly_atmospheric_temperatures[NEW_month]
+        self.initial_mont = new_month
+        self.current_rate_data = self.initial_rate_data
+        self.current_number_users = self.initial_number_users
+        self.intrinsic_temperature = self.atmospheric_temperatures + 1.25 * self.current_number_users + 1.25 * self.current_rate_data
+        self.temperature.ai = self.intrinsic_temperature
+        self.temperature_noai = (self.optimal_temperature[0] + self.optimal_temperature[1]) / 2.0
+        self.total_energy_ai = 0.0
+        self.total_energy_noai = 0.0
+        self.reward = 0.0
+        self.game_over = 0
+        self.train = 1
+        
+    #MAKING A METHOD THAT GIVES US AT ANY TIME THE CURRENY STATE, THE LAST REWARD AND WHETEWE THE GME IS OVER
+        
+    def observe(self):
+        scaled_temperature_ai = (self.temperature_ai - self.min_temperature) / (self.max_temperature - self.min_temperature)
+        scaled_number_users = (self.current_number_users - self.min_number_users) / (self.max_number_users - self.min_number_users)
+        scaled_rate_data = (self.current_rate_data - self.min_rate_data) / (self.max_rate_data - self.min_rate_data)
+        current_state = np.matrix([scaled_temperature_ai, scaled_number_users, scaled_rate_data])
+        return current/-state, self.reward, self.game_over
