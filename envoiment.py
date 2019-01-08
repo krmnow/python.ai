@@ -74,5 +74,32 @@ class Environment(object):
             #updating the new serwer temperature when there is no AI
             self.temperature_noai += delta_intrinsic_temperature
             
+            #GETTING GAME OVER
+            if self.temperature_ai < self.min_temperature:
+                if self.train == 1:
+                    self.game_over = 1
+                else:
+                    self.temperature_ai = self.optimal_temperature[0]
+                    self.total_energy_ai += self.optimal_temperature[0] - self.temperature_ai
+            elif self.temperature_ai > self.max_temperature:
+                if self.train == 1:
+                    self.game_over = 1
+                else:
+                    self.temperature_ai = self.optimal_temperature[1]
+                    self.total_ebergy_ai += self.temperature_ai - self.optimal_temperature[1]
+                    
+            #UPDATING THE SCORES
             
-                
+            #updating the total energy spent by the AI
+            self.total_energy_ai += energy_ai
+            #updating the total energy spent by serwer's cooling system when there is no AI
+            self.total_energy_ai += energy_noai  
+            
+            #SCALING THE NEXT STAGE
+            
+            #RETURNING THE NEXT STATE, THE REWARD AND GAME OVER
+            
+#MAKING A METHOD THAT RESETS THE ENVOIRMENT
+            
+            
+            
