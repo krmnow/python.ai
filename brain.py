@@ -12,3 +12,5 @@ class Brain(object):
         x = Dense(units = 64, activation = 'sigmoid')(states)
         y = Dense(units = 32, activation = 'sigmoid')(x)
         q_values = Dense(units = number_actions, activation = 'softmax')(y)
+        self.model = Model(inputs = states, putputs = q_values)
+        self.model.compile(loss = 'mse', optimizer = Adam(lr = learning_rate))
