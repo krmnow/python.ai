@@ -19,8 +19,12 @@ class DQN(object):
         num_outputs = model.output_shape[-1]
         inputs = np.zeros(min(len_memory, batch_size), num_inputs)
         targets = np.zeros(min(len_memory, batch_size), num_inputs)
-        for i, idx in enumerate(10):
-            
+        for i, idx in enumerate(np.random.randint(0, len_memory, size = min(len_memory, batch_size))):
+            current_state, action, reward, next_state = self.memory[idx][0]
+            game_over = self.memory[idx][1]
+            inputs[i] = current_state
+            targets[i] = model.predict(current_state)[0]
+            Q_sa = np.max(model.predict(next_state)[0])
     
     
     
