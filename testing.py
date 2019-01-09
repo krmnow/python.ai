@@ -25,7 +25,21 @@ model = load_model("model.h5")
 train = False
 
 #RUNNING A 1 YAER SIMULATION IN INPERENCE MODE
+env.train = train
+current_state, _, - = env.observe()
+for timestep in range(0, 12 * 30 * 24 * 60):
+    q_values = model.predict(current_state)
+    action = np.argmax(q_values[0])
+    if (action - direction_boundary) < 0:
+        direction = -1
+    else:
+        direction = 1
+    energy_ai = abs(action - direction_boundary) * temperature_step
+    netx_state, reward, game_over = env.update_env(direction, energy_ai, int(timestep / (30 * 24 * 60)))
+    current_state = next_state
+
 print('\n")
 print("Epoch: {:03d}/{:03d}".format(epoch, number_epochs))
 print("Total energy spend with an AI is {:.0f} ".format(env.total_energy_ai))
 print("Total energy spend with no AI is {:.0f} ".format(env.total_energy_noai))
+print("ENERGY SAVED: {:.0f} ".format((env.total_energy_noai - env.total_energy_ai) / env.total_energy_noai))
