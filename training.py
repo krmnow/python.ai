@@ -35,6 +35,7 @@ train = True
 env.train = train
 model = brain.model
 if env.train:
+    #STARTING THE LOOP OVER ALL THE EPOCHSA
     for epoch in range(1, number_epochs):
         totwal_reward = 0
         loss = 0.
@@ -53,12 +54,30 @@ if env.train:
                     direction = 1
                 energy_ai = abs(action - direction_boundary) * temperature_step
             #PLAYING THE NEXT ACTION BY INFERENCE
-            
+            else:
+                q_values = model.predict(current_state)
+                action = np.argmax(q_values[0])
+                 if (action - direction_boundary) < 0:
+                    direction = -1
+                else:
+                    direction = 1
+                energy_ai = abs(action - direction_boundary) * temperature_step
             #UPDATING THE ENVIROMENT AND REACHING THE NEXT STATE
-            
+            netx_state, reward, game_over = env.update_env(direction, energy_ai, int(timestep / (30 * 24 * 60)))
+            total_reward += reward
             #STORING THIS NEW TRANSITION INTO MEMORY
-            
+            dqn.remember([current_state, action, reward, next_state], game_over)
             #GATHERING IN TWO SEPERATE BATCHES THE INPUST AND THE TARGETS
-            
+            inputs, targets = dqn.get_batch(model, batch_size = batch_size)
             #COMPUTING THE LOSS OVER TWO WHOLE BATCHES OF INOUST AND TARGETS
+            loss += model.train_on_batch(inputs, targets)
+            timestep += 1
+            current_state = next_state
+            
+        print('\n")
+        print("Epoch: {:03d}/{:03d}".format(epoch, number_epochs))
+        print("Total energy spend with an AI is {:.0f} ".format(env.total_energy_ai))
+        print("Total energy spend with no AI is {:.0f} ".format(env.total_energy_noai))
+        
+        model.save("model.h5")
             
