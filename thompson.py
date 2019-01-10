@@ -32,6 +32,17 @@ for n in range(0, N):
     reward_rs = X[n, strategy_rs]
     total_reward_rs += reward_rs
     #Thompson Sampling
+    max_random = 0
     for i in range(0, d):
-        
-            
+        random_beta = random.betavariate(numbers_of_rewards_1[i] + 1, numbers_of_rewards_0[i] + 1)
+        if random_beta > max_random:
+            max_random = random_beta
+            strategy_ts =1
+    reward_ts = X[n, strategy_ts]
+    if reward_ts == 1:
+        numbers_of_rewards_1[strategy_ts] = numbers_of_rewards_1[strategy_ts] + 1
+    else:
+        numbers_of_rewards_0[strategy_ts] = numbers_of_rewards_1[strategy_ts] + 1
+    strategies_selected_ts.append(strategy_ts)
+    total_reward_ts += reward_ts
+    
