@@ -53,3 +53,8 @@ relative_return = (total_reward_ts - total_reward_rs) / total_reward_rs
 print("Absolute return: {:.0f} $".format(absolute_return))
 print("Relative return: {:.0f} %".format(relative_return))
 
+plt.hist(strategies_selected_ts)
+plt.title("Histogram of selection")
+plt.xlabel("Strategy")
+plt.ylabel("Number of times the strategy was selected")
+plt.show()
