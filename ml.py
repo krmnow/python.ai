@@ -19,3 +19,6 @@ labelencoder_X = LabelEncoder()
 X[:, 0] = labelencoder_X.fit_transform(X[:, 0])
 one_hot_encoder = OneHotEncoder(categorical_features = [0])
 X = one_hot_encoder.fit_transform(X).toarray())
+
+labelencoder_y = LabelEncoder()
+y[:, 0] = labelencoder_y.fit_transform(X[:, 0])
