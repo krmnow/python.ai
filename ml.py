@@ -11,3 +11,10 @@ from sklearn.prepocessing import Imputer
 imputer = Imputer(missing_values = 'NaN', strategy = 'mean', axis = 0)
 imputer = imputer.fit(X[:, 1:3])
 X[:, 1:3] = imputer.transform()X[:, 1:3]
+
+# encoding categorical data
+
+from sklearn.prepocessing import LabelEncoder, OneHotEncoder
+labelencoder_X = LabelEncoder()
+X[:, 0] = labelencoder_X.fit_transform(X[:, 0])
+one_hot_encoder = OneHotEncoder()
