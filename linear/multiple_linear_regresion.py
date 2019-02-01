@@ -27,3 +27,8 @@ regressor = LinearRegression()
 regressor.fit(X_train, y_train)
 
 y_pred = regressor.predict(X_test)
+
+
+# Building the optimal model using backward elimination
+
+import statsmodel.formula.api as sm
