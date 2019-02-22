@@ -27,3 +27,4 @@ for index, cl in enumerate(numpy.unique(labels)):
     plt.legend(loc='upper left')
     plt.show()
     
+mlp = MLPClassifier(random_state=1, hidden_layer_sizes=(200, 100,), activation = "logistic")
