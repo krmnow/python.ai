@@ -20,3 +20,10 @@ plt.ylim(y.min(), y.max())
 #rysowanie wykresu danyc
 
 classes = ["setosa", "versocolor", "virginica"]
+for index, cl in enumerate(numpy.unique(labels)):
+    plt.scatter(data[labels == cl, 0], data[labels == cl, 1], c=cmap(index), marker=markers[index], s=50, label=classes[index])
+    plt.xlabel('petal lenght')
+    plt.ylebel('sepal lenght')
+    plt.legend(loc='upper left')
+    plt.show()
+    
