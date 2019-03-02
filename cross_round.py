@@ -10,3 +10,10 @@ def aplly_move(board_state, move, side):
   state_list = list(list(s) for s in borad_state)
   state_list[move_x][move_y] = side
   return tuple(tuple(s) for s in state_list)
+
+import itertools
+def available_moves(board_state):
+  for x, y in itertools.product(range(3), range(3)):
+    if board_state[x][y] ==0:
+      yield(x, y)
+      
