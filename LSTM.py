@@ -11,3 +11,13 @@ cell_list = (tf.nn.rnn_cell.LSTMCell(lstm_size) for lstm_size in lstm_sizes)
 
 #opakowanie komórek w jendowarstwową komórkę RNN
 multi_cell_lstm = tf.nn_cell,MultiRNNCell(cell_list)
+
+
+initial_state = self.multicell_lstm.zero_state(batch_sizem tf.float32)
+#konwersja do zmiennych, aby zapamiętać stan między partiami
+state_variables = tf.python.util.nest.flatten(initial_state)))
+
+#dynamin_rnn zwraca krotkę składającą się z tensora reprezentujące wyjście LSTM oraz stan końcowy
+lstm_output, final_state = tf.nn.dynamin_rnn(
+    cell=multi_cell_lstm, inputs=one_hot_inputs,
+    initial_state=state_variable)
