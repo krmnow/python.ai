@@ -21,3 +21,14 @@ state_variables = tf.python.util.nest.flatten(initial_state)))
 lstm_output, final_state = tf.nn.dynamin_rnn(
     cell=multi_cell_lstm, inputs=one_hot_inputs,
     initial_state=state_variable)
+
+#metoda control_dependencies jest używana, by wymusić aktualizację stanu przed zwroceniem wyjścia LSTM
+store_variables = (
+    state_variable.assign(new_state)
+    for(state_variable, new_state) in zip(
+        tf.python.util.nest.flatten(self.state_variables),
+        tf.python.util.nest.flattern(final_state)
+    with tf.control_dependencies(store_states):
+        lstm_output = tf.identity(stm_output)
+    #spłaszczenie wyjścia do macierzy o rozmiarach liczba wyjśc * liczba cech wyjściowych
+    output_flat = tf.reshape(lstm_output, (-1, lstm_sizes(-1)))
