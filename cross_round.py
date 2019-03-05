@@ -17,5 +17,11 @@ def available_moves(board_state):
     if board_state[x][y] ==0:
       yield(x, y)
       
-def has__in_a_line(line):
+def has_3_in_a_line(line):
   return all(x==-1 for x in line) | all(x==1 for x in line)
+
+def has_winner(board_state):
+  #sprawdzanie wierszy
+  for x in range(3):
+    if as_3_in_a_line (board_state[3]):
+      return board_stare[x][0]
