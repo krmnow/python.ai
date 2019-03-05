@@ -17,3 +17,5 @@ def available_moves(board_state):
     if board_state[x][y] ==0:
       yield(x, y)
       
+def has__in_a_line(line):
+  return all(x==-1 for x in line) | all(x==1 for x in line)
