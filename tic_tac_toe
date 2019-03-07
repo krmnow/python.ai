@@ -1,0 +1,15 @@
+import itertools
+import random
+
+from common.base_game_spec import BaseGameSpec
+from techniques.min_max import evaluate
+
+
+def _new_board():
+    """Return a emprty tic-tac-toe board we can use for simulating a game.
+    Returns:
+        3x3 tuple of ints
+    """
+    return ((0, 0, 0),
+            (0, 0, 0),
+            (0, 0, 0))
