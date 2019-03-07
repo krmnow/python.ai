@@ -42,4 +42,8 @@ def available_moves(board_state):
         board_state: The board_state we want to check for valid moves.
     Returns:
         Generator of (int, int): All the valid moves that can be played in this position.
+        
     """
+    for x, y in itertools.product(range(3), range(3)):
+        if board_state[x][y] == 0:
+            yield (x, y)
