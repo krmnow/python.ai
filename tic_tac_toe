@@ -35,3 +35,11 @@ def apply_move(board_state, move, side):
                 yield board_state[x]
 
     return tuple(get_tuples())
+def available_moves(board_state):
+    """Get all legal moves for the current board_state. For Tic-tac-toe that is all positions that do not currently have
+    pieces played.
+    Args:
+        board_state: The board_state we want to check for valid moves.
+    Returns:
+        Generator of (int, int): All the valid moves that can be played in this position.
+    """
