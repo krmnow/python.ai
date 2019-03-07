@@ -13,3 +13,25 @@ def _new_board():
     return ((0, 0, 0),
             (0, 0, 0),
             (0, 0, 0))
+
+def apply_move(board_state, move, side):
+    """Returns a copy of the given board_state with the desired move applied.
+    Args:
+        board_state (3x3 tuple of int): The given board_state we want to apply the move to.
+        move (int, int): The position we want to make the move in.
+        side (int): The side we are making this move for, 1 for the first player, -1 for the second player.
+    Returns:
+        (3x3 tuple of int): A copy of the board_state with the given move applied for the given side.
+    """
+    move_x, move_y = move
+
+    def get_tuples():
+        for x in range(3):
+            if move_x == x:
+                temp = list(board_state[x])
+                temp[move_y] = side
+                yield tuple(temp)
+            else:
+                yield board_state[x]
+
+    return tuple(get_tuples())
