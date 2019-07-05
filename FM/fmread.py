@@ -43,3 +43,9 @@ train_set, test_set = train_test_split(dataset, test_size=0.2, random_state=42)
 #zależności między atrybutami
 corr_matrix = dataset.corr()
 print(corr_matrix)
+
+from pandas.plotting import scatter_matrix
+
+#graficzne zależności między 4 atrybutami
+attributes = ["Age","Dribbling","Teamwork", "PositionsDesc"]
+scatter_matrix(dataset[attributes], figsize=(12,8))
