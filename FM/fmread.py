@@ -39,3 +39,7 @@ def split_train_test_by_id(data, test_ratio, id_column, hash=hashib.md5):
 #train data z zarodkiem liczb losowych
 from sklearn.model_selection import train_test_split
 train_set, test_set = train_test_split(dataset, test_size=0.2, random_state=42)
+
+#zależności między atrybutami
+corr_matrix = dataset.corr()
+print(corr_matrix)
