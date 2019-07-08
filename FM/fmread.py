@@ -49,3 +49,10 @@ from pandas.plotting import scatter_matrix
 #graficzne zależności między 4 atrybutami
 attributes = ["Age","Dribbling","Teamwork", "PositionsDesc"]
 scatter_matrix(dataset[attributes], figsize=(12,8))
+
+#kodowanie pozycji na cyfry
+from sklearn.preprocessing import LabelEncoder
+encoder = LabelEncoder()
+position_description = dataset['PositionsDesc']
+position_description_encoded = encoder.fit_transform(position_description)
+print(position_description)
