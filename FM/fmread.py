@@ -56,3 +56,10 @@ encoder = LabelEncoder()
 position_description = dataset['PositionsDesc']
 position_description_encoded = encoder.fit_transform(position_description)
 print(position_description)
+
+#użycie OneHotEncpder
+#TODO rozbić na kolumny pozycje albo zlikwidować slash
+from sklearn.preprocessing import OneHotEncoder
+encoder = OneHotEncoder()
+position_description_1hot = encoder.fit_transform(position_description_encoded.reshape(-1,1))
+
