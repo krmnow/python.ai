@@ -58,8 +58,21 @@ position_description_encoded = encoder.fit_transform(position_description)
 print(position_description)
 
 #użycie OneHotEncpder
-#TODO rozbić na kolumny pozycje albo zlikwidować slash
 from sklearn.preprocessing import OneHotEncoder
 encoder = OneHotEncoder()
 position_description_1hot = encoder.fit_transform(position_description_encoded.reshape(-1,1))
+
+#zamiana wartoci na takie od 0 -1 
+
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
+num_pipeline = Pipeline([
+        ('impuer', Imputer(strategy="median")),
+        ('attribs_adder', CombinedAttributesAdder()),
+        ('std_scaler', StandardScaler()),
+        
+        ])
+
+dataset_num_tr = num_pipeline.fit_transform(dataset_num)
 
