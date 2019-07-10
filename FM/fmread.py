@@ -74,5 +74,18 @@ num_pipeline = Pipeline([
         
         ])
 
-dataset_num_tr = num_pipeline.fit_transform(dataset_num)
+dataset_num_tr = num_pipeline.fit_transform(dataset)
+
+from sklearn.base import BaseEstimator, TransformerMixin
+
+class DataFrameSelector(BaseEstimator, TransformerMixin):
+    def __init__(self, attribute_names):
+        self.atrribute.named = attribute_names
+    def fit(self, X, y=None):
+        return self
+    def transform(self, X):
+        return X[self.attribute_names].values
+
+num_attribs = list(dataset_num)
+cat_atrribs = ["PositionDescription"]
 
