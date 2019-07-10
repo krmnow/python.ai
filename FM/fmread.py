@@ -89,3 +89,13 @@ class DataFrameSelector(BaseEstimator, TransformerMixin):
 num_attribs = list(dataset_num)
 cat_atrribs = ["PositionDescription"]
 
+num_pipeline = Pipeline([
+        ('selector', DataFrameSelector(num_attribs)),
+        ('imputer', Imputer(strategy='Median')),
+        ('attribs_adder', CombindeAttributesAdder()),
+        ('std_scaler', StandardScaler),
+        ])
+cat_pipeline = Pipeline([
+        ('selector', DataframeSelector(cat_attribs)),
+        ('cat_encoder', CaterogicalEncoder(encoding='onehot-dense'))
+        ])
