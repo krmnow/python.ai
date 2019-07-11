@@ -21,6 +21,10 @@ from sklearn.model_selection import train_test_split
 dataset.hist(bins=50, figsize=(20,15))
 plt.show()
 
+#use seaborn to visualize data
+import seaborn as sns
+sns.set()
+
 import numpy as np
 def split_train_test(data, test_ratio):
     shuffled_indices = np.random.permutation(len(data))
