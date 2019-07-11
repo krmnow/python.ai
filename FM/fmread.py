@@ -74,3 +74,12 @@ scaler = StandardScaler()
 pos = dataset['PositionsDesc'].values.reshape(-1,1)
 dataset['PositionsDesc'] = scaler.fit_transform(pos)
 print(dataset['PositionsDesc'].head(5))
+
+#regresja logistyczna
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+
+regressor = LogisticRegression()
+regressor.fit(X_train, y_train)
+y_pred = regressor.predict(X_test)
