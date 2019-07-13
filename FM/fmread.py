@@ -83,3 +83,20 @@ from sklearn.metrics import accuracy_score
 regressor = LogisticRegression()
 regressor.fit(X_train, y_train)
 y_pred = regressor.predict(X_test)
+
+#Use KNeighborsClassifier
+from sklearn.neighbors import KNeighborsClassifier
+regressor = KNeighborsClassifier(n_neighbors=5)
+regressor.fit(X_train, y_train)
+y_pred = regressor.predict(X_test)
+print("K-neighbors(n = 5):")
+
+#CONFIUSON MATRIX
+cm = confusion_matrix(y_test,y_pred)
+print(cm)
+print("Wrong: ",cm[1][0] + cm[0][1])
+print("Good: ",cm[0][0] + cm[1][1])
+#Accuracy
+print(accuracy_score(y_test,y_pred))
+print("")
+
