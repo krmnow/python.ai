@@ -100,3 +100,21 @@ print("Good: ",cm[0][0] + cm[1][1])
 print(accuracy_score(y_test,y_pred))
 print("")
 
+
+#Decision tree
+from sklearn.tree import DecisionTreeClassifier
+regressor = DecisionTreeClassifier()
+regressor.fit(X_train, y_train)
+y_pred = regressor.predict(X_test)
+print("Decision tree:")
+
+#CONFIUSON MATRIX
+cm = confusion_matrix(y_test,y_pred)
+print(cm)
+print("Wrong: ",cm[1][0] + cm[0][1])
+print("Good: ",cm[0][0] + cm[1][1])
+
+#Accuracy
+print(accuracy_score(y_test,y_pred))
+print("")
+
