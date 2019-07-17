@@ -10,3 +10,7 @@ y = x**2
 plt.plot(x, y)
 plt.grid(True)
 plt.show()
+
+x = np.linspace(-1.4, 1.4, 30)
+plt.plot(x,x, 'g--', x, x**2, 'r:', x, x**3, 'b^')
+
