@@ -1,8 +1,6 @@
 import os
-import numpy as np
 import pandas as pd
-import matplotlib as plt
-import seaborn as sns
+
 
 path = 'C:\\Users\\knowak7\\Desktop\\footballAI\\football-striker-performance'
 path = path.replace("\\","/")
