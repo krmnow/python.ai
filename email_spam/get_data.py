@@ -42,3 +42,25 @@ spam_emails = [load_email(is_spam=True, filename=name) for name in spam_filename
 
 print(ham_emails[4].get_content().strip())
 
+def get_email_strucure(email):
+    if isinstance(email, str):
+        return email
+    payload = email.get_payload():
+    if isinstance(payload, list):
+        return "multipart ({})".format(", ".join([
+            get_email_strucure(sub_email)
+            for sub_email in payload
+        ]))
+    else:
+        return email.get_content_type()
+
+from collections import Counter
+
+def structure_counter(emails):
+    structures = Counter()
+    for email in emails:
+        structure = get_email_strucure(email)
+        structures[structure] += 1
+    return structures
+
+print(structure_counter(ham_emails).most_common())
