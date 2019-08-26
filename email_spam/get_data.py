@@ -64,3 +64,4 @@ def structure_counter(emails):
     return structures
 
 print(structure_counter(ham_emails).most_common())
+print(structures_counter(spam_emails).most_common()
