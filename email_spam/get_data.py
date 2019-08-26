@@ -64,4 +64,16 @@ def structure_counter(emails):
     return structures
 
 print(structure_counter(ham_emails).most_common())
-print(structures_counter(spam_emails).most_common()
+print(structures_counter(spam_emails).most_common())
+
+def get_email_structure(email):
+    if isinstance(email, str):
+        return email
+    payload = email.get_payload()
+    if isinstance(payload, list):
+        return "multipart({})".format(", ".join([
+            get_email_structure(sub_email)
+            for sub_email in payload
+        ]))
+    else:
+        return email.get_content_type()
