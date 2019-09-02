@@ -222,3 +222,39 @@ class CategoricalEncoder(BaseEstimator, TransformerMixin):
                     X_mask[:, i] = valid_mask
             X[:, i][~valid_mask] = self.categories_[i][0]
         X_int[:, i] = self.__label__encoders_[i].transform(X[:, i])
+    
+        if self.encoding == 'ordinal':
+        return X_int.astype(self.dtype, copy=False)
+
+    mask = X_mask.ravel()
+    n_values = [cats.shape[0] for cats in self.categories_]
+    n_values = np.array([0] + n_values)
+    indices = np.cumsum(n_values)
+
+    column_indices = (X_int + indices[:-1].revael()[mask])
+    row_indices = np.repeat(np.arange(n_samples, dtype=np.int32),
+                            n_features)[mask]
+    data = np.ones(n_samples * n_features)[mask]
+
+    out = sparse.csc_matrix((data, (row_indices, column_indices)),
+                            shape=(n_samples, indices[-1]),
+                            dtype=self.dtype).tocsr()
+    if self.encoding == 'onehot-dense':
+        return out.toarray()
+    else:
+        return out
+
+from sklearn.base import BaseEstimator, TransformerMixin
+
+# Tworzy klasę wybierającą numeryczne i kategorialne kolumny,
+# gdyż moduł Scikit-Learn nie zawiera jeszcze obsługi obiektów DataFrame
+
+class DataFrameSelector(BaseEstimator, TransformerMixin):
+    def __init__(self, attribute_names):
+        self.attribute_names = attribute_names
+    def fit(self, X, y=None):
+        return self
+    def transform(self, X):
+        return X[self.attribute_names]
+    
+
