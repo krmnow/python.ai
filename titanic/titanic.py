@@ -180,7 +180,7 @@ class CategoricalEncoder(BaseEstimator, TransformerMixin):
             else:
                 valid_mask = np.in1d(Xi, self.categories[i])
                 if not np.all(valid_mask):
-                    if. self.handle_unknow == 'error':
+                    if self.handle_unknow == 'error':
                         diff = np.unique(Xi[~valid_mask])
                         msg = ("znaleziono nieznane kategorie {0} w kolumnie {1} podczas dopasowywania".format(diff, i))
                         raise ValueError(msg)
@@ -222,8 +222,8 @@ class CategoricalEncoder(BaseEstimator, TransformerMixin):
                     X_mask[:, i] = valid_mask
             X[:, i][~valid_mask] = self.categories_[i][0]
         X_int[:, i] = self.__label__encoders_[i].transform(X[:, i])
-    
-        if self.encoding == 'ordinal':
+
+    if self.encoding == 'ordinal':
         return X_int.astype(self.dtype, copy=False)
 
     mask = X_mask.ravel()
@@ -256,5 +256,86 @@ class DataFrameSelector(BaseEstimator, TransformerMixin):
         return self
     def transform(self, X):
         return X[self.attribute_names]
-    
+
+
+#Stwórzmy potok dla atrybutów numerycznych:
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import Imputer
+
+imputer = Imputer(strategy="median")
+
+num_pipeline = Pipeline([
+    ("select_numeric", DataFrameSelector(["Age", "SibSp", "Parch", "Fare"])),
+    ("imputer", Imputer(strategy="median")),
+])
+
+print(num_pipeline.fit_transform(train_data))
+
+#Potrzebujemy również klasy przypisującej dla kolumn zawierających
+# kategorialne ciągi znaków (standardowa klasa Imputer nie działa wobec nich):
+
+#Inspirację stanowiło pytanie umieszczone na stronie stackoverflow.com/questions/25239958
+class MostFrequentImputer(BaseEstimator, TransformerMixin):
+    def fit(self, X, y=None):
+        self.most_frequent = pd.Series([X[c].value_counts().index[0] for c in X],
+            index=X.columns)
+        return self
+    def transform(self, X, y=None):
+        return X.fillna(self.most_frequent)
+
+#Teraz możemy stworzyć potok dla atrybutów kategorialnych:
+
+cat_pipeline = Pileline([
+    ('select_cat', DataFrameSelector(["Pclass", "Sex", "Embarked"])),
+    ('imputer', MostFrequentImputer()),
+    ("cat_encoder", CategoricalEncoder(encoding='onehot-dense')),
+])
+
+print(cat_pipeline.fit_transform(train_data))
+
+#W końcu możemy połączyć potoki numeryczne i kategorialne:
+
+from sklearn.pipeline import FeatureUnion
+preprocess_pipeline = FeatureUnion(transformer_list=[
+    ("num_pipeline", num_pipeline),
+    ("cat_pipeline", cat_pipeline),
+])
+
+#Świetnie! Mamy teraz do dyspozycji dobry potok przetwarzania wstępnego,
+# który pobiera nieprzetworzone dane i na wyjściu umieszcza numeryczne cechy wejściowe, które możemy przesłać do dowolnego modelu uczenia maszynowego.
+
+X_train = preprocess_pipeline.fit_transform((train_data))
+print(X_train)
+
+#i etykiety
+y_train = train_data["Survived"]
+
+#możemy przystąpić do uczenia klasyfikatora. Zaczynamy od klasySVC
+
+from sklearn.svm import SVC
+
+svm_clf = SVC()
+svm_clf.fit(X_train, y_train)
+
+#i już jest wyuczony. Można go użyć do obliczania prognoz
+
+X_test = preprocess_pipeline.transform(test_data)
+y_pred = svm_clf.predict(X_test)
+
+#Teraz wystarczyłoby wygenerować plik CSV przechowujący te prognozy (przy zachowaniu formatu zdefiniowanego w serwisie Kaggle),
+# a następnie przesłać go i liczyć na dobre wyniki. Ale chwila! Możemy jeszcze dopomóc szczęściu.
+# Możemy przecież skorzystać ze sprawdzianu krzyżowego, aby sprawdzić, jak dobry jest nasz model
+
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(svm_clf, X_train, y_train, cv=10)
+print(scores.mean())
+
+#Poszukajmy metody na ~80%. Spróbujmy RandomForestClassifier
+
+from sklearn.ensemble import RandomForestClassifier
+
+forest_clf = RandomForestClassifier(random_state=42)
+scores = cross_val_score(forest_clf, X_train, y_train, cv=10)
+print(scores.mean())
 
